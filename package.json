@@ -1,0 +1,49 @@
+{
+  "name": "miro",
+  "version": "0.1.0",
+  "description": "Miro prototype to explore database design",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://bitbucket.org/mckaysoftware/miro.git"
+  },
+  "author": "Félix Saparelli <felix.saparelli@mckay.co.nz>",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/mckaysoftware/miro#readme",
+  "dependencies": {
+    "bunyan": "^1.4.0",
+    "dotenv": "^1.1.0",
+    "koa": "^0.21.0",
+    "lodash": "^3.9.3",
+    "moment": "^2.10.3",
+    "rethinkdb": "^2.0.0-2"
+  },
+  "devDependencies": {
+    "cssnano": "^1.4.2",
+    "cssnext": "^1.7.0",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^5.1.0",
+    "gulp-browserify": "^0.5.1",
+    "gulp-jade": "^1.0.1",
+    "gulp-jscs": "^1.6.0",
+    "gulp-jshint": "^1.11.0",
+    "gulp-mocha": "^2.1.1",
+    "gulp-notify": "^2.2.0",
+    "gulp-postcss": "^5.1.8",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-uglify": "^1.2.0",
+    "gulp-util": "^3.0.5",
+    "lost": "^6.3.0",
+    "postcss-conditionals": "^1.2.0",
+    "postcss-each": "^0.2.0",
+    "postcss-for": "^1.0.1",
+    "postcss-mixins": "^0.3.0",
+    "postcss-nested": "^0.3.2",
+    "postcss-quantity-queries": "^0.3.1",
+    "postcss-simple-vars": "^0.3.0",
+    "strip-ansi": "^2.0.1"
+  }
+}
