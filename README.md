@@ -1,4 +1,4 @@
-# Miro
+# Orim
 
 _Prototype._
 
@@ -10,8 +10,8 @@ _Prototype._
 ## Develop
 
 ```bash
-$ git clone git@bitbucket.org/mckaysoftware/miro.git
-$ cd miro
+$ git clone git@github.com:passcod/orim.git
+$ cd orim
 $ atom .
 $ npm run watch
 ```
@@ -21,7 +21,7 @@ $ npm run watch
 Just once:
 
 ```bash
-# Sends your SSH public key to a coworker on Slack so they can grant access
+# Sends your SSH public key to a contributor on Slack so they can grant access
 $ npm run deploy auth
 Requesting deploy rights...
 ```
@@ -31,9 +31,9 @@ After that:
 ```bash
 # Checks your access to remote deployment tools
 $ npm run deploy check
-You can deploy to alpha.withmiro.com (internal testing)
-You can deploy to beta.withmiro.com (private beta)
-You can deploy to withmiro.com (production)
+You can deploy to alpha.orim.io (internal testing)
+You can deploy to beta.orim.io (private beta)
+You can deploy to orim.io (production)
 ```
 
 Whenever:
@@ -42,10 +42,10 @@ Whenever:
 # To deploy
 $ npm run deploy
 All tests pass
-Deployed to alpha.withmiro.com (ad63nd)
+Deployed to alpha.orim.io (ad63nd)
 
 # Or to production (if you have permission)
 $ npm run deploy production
 All tests pass
-Deployed to withmiro.com (v1.2.3)
+Deployed to orim.io (v1.2.3)
 ```

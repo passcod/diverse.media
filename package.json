@@ -1,18 +1,18 @@
 {
-  "name": "miro",
+  "name": "orim",
   "version": "0.1.0",
-  "description": "Miro prototype to explore database design",
+  "description": "Orim prototype to explore database design",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://bitbucket.org/mckaysoftware/miro.git"
+    "url": "git+https://github.com/passcod/orim.git"
   },
-  "author": "Félix Saparelli <felix.saparelli@mckay.co.nz>",
+  "author": "Félix Saparelli <me@passcod.name>",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/mckaysoftware/miro#readme",
+  "homepage": "https://github.com/passcod/orim",
   "dependencies": {
     "bunyan": "^1.4.0",
     "dotenv": "^1.1.0",
