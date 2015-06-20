@@ -1,4 +1,4 @@
 /node_modules
 *.log
-/public/assets
+/public
 /build
