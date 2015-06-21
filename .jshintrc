@@ -1,0 +1,16 @@
+{
+    "browser": true,
+    "curly": true,
+    "eqeqeq": true,
+    "esnext": true,
+    "globalstrict": true,
+    "latedef": true,
+    "maxcomplexity": 12,
+    "noarg": true,
+    "node": true,
+    "predef": ["-Promise", "ko", "moment", "sf", "$"],
+    "plusplus": true,
+    "strict": false,
+    "undef": true,
+    "unused": true
+}
