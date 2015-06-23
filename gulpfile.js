@@ -5,7 +5,6 @@ let merge = require('merge-stream');
 let newer = require('gulp-newer');
 let notifier = require('node-notifier');
 let path = require('path');
-let rename = require('gulp-rename');
 let size = require('gulp-size');
 let source = require('vinyl-source-stream');
 let sourcemaps = require('gulp-sourcemaps');
@@ -52,7 +51,7 @@ function copy(from, to) {
 }
 
 function assetsCopy() {
-    return merge.apply(this, [
+    return merge.apply(merge, [
         copy('build/css/*', 'public/css/'),
         copy('build/js/*', 'public/js/'),
         copy('build/maps/*', 'public/maps/'),
@@ -135,10 +134,27 @@ gulp.task('css', function() {
     .pipe(gulp.dest('build/css'));
 });
 
-let makeJs = function(name, list, deps) {
+function lintJs(name, list, deps) {
+    deps = deps || [];
+    const task = `lint.${name}`;
+    const jscs = require('gulp-jscs');
+    const jshint = require('gulp-jshint');
+    gulp.task(task, deps, function() {
+        return gulp.src(list)
+        .pipe(plumber())
+        .pipe(debug(task))
+        .pipe(jscs())
+        .pipe(jshint())
+        .pipe(jshint.reporter('default'))
+        .pipe(jshint.reporter('fail'));
+    });
+}
+
+function makeJs(name, list, deps) {
     deps = deps || [];
     let task = `js.${name}`;
 
+    lintJs(name, list, deps);
     gulp.task(task, deps, function() {
         return require('browserify')({
             entries: list,
@@ -157,10 +173,11 @@ let makeJs = function(name, list, deps) {
         .pipe(sourcemaps.write('../maps'))
         .pipe(gulp.dest('build/js/'));
     });
-};
+}
 
 makeJs('index', ['src/js/orim.js']);
 
 gulp.task('js', [
     'js.index',
+    'lint.index',
 ]);
