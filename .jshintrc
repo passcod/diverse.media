@@ -8,9 +8,10 @@
     "maxcomplexity": 12,
     "noarg": true,
     "node": true,
-    "predef": ["-Promise", "ko", "moment", "sf", "$"],
+    "predef": [],
     "plusplus": true,
     "strict": false,
     "undef": true,
-    "unused": true
+    "unused": true,
+    "validthis": true
 }

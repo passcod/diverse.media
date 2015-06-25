@@ -18,12 +18,25 @@
   "homepage": "https://github.com/passcod/orim",
   "dependencies": {
     "bunyan": "^1.4.0",
+    "co": "^4.5.4",
     "dotenv": "^1.1.0",
+    "jsonapi-serializer": "^1.0.2",
     "koa": "^0.21.0",
+    "koa-better-body": "^1.0.17",
+    "koa-compressor": "^1.0.3",
+    "koa-cors": "0.0.16",
+    "koa-helmet": "^0.1.0",
+    "koa-json": "^1.1.1",
+    "koa-json-logger": "0.0.20",
+    "koa-jsonapi-headers": "^1.1.2",
+    "koa-logger": "^1.2.2",
+    "koa-router": "^5.1.2",
     "lodash": "^3.9.3",
     "moment": "^2.10.3",
-    "rethinkdb": "^2.0.0-2",
-    "thinky": "^2.0.6"
+    "mz": "^2.0.0",
+    "pkginfo": "^0.3.0",
+    "thinky": "^2.0.6",
+    "yayson": "^1.0.5"
   },
   "devDependencies": {
     "babelify": "^6.1.2",

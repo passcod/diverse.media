@@ -1,4 +1,7 @@
-/node_modules
-*.log
-/public
 /build
+/logs
+/node_modules
+/public
+
+.env
+*.log
