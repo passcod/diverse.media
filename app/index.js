@@ -23,8 +23,8 @@ app.use(require('koa-compressor')());
 app.use(require('koa-json')({pretty: config.pretty}));
 app.use(function *(next) {
     this.jsonapi = {
-        read: require('yayson').Store,
-        write: require('jsonapi-serializer'),
+        reader: require('yayson').Store,
+        writer: require('jsonapi-serializer'),
     };
     yield next;
 });
