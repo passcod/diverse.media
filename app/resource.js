@@ -47,9 +47,10 @@ function resourceIndex(app) {
         res.id = i;
         return res;
     }), {
-        attributes: ['name', 'caps'],
+        attributes: ['name', 'caps']
     }).then(function(data) {
         router.get('/', function *(next) {
+            data.meta = {version: app.config.version};
             this.body = data;
             yield next;
         });

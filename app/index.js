@@ -5,6 +5,7 @@ const helmet = require('koa-helmet');
 const koa = require('koa');
 
 const app = koa();
+app.config = config;
 app.name = config.name;
 app.proxy = config.proxy;
 app.resource = require('./resource')(app);
