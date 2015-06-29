@@ -32,6 +32,8 @@ app.use(function *(next) {
 Promise.all([
     app.resource('projects'),
 ]).then(function() {
+    return app.resource('index');
+}).then(function() {
     console.log('Starting server...');
     return app.listen(config.port, function() {
         console.log(`Application '${config.name}' running on port ${config.port}`);

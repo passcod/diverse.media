@@ -39,8 +39,33 @@ function setupRoute(router, route, method, gen) {
     }
 }
 
+function resourceIndex(app) {
+    let router = new Router();
+    const Writer = require('jsonapi-serializer');
+
+    return new Writer('resources', app.resources.map(function (res, i) {
+        res.id = i;
+        return res;
+    }), {
+        attributes: ['name', 'caps'],
+    }).then(function(data) {
+        router.get('/', function *(next) {
+            this.body = data;
+            yield next;
+        });
+
+        app.use(router.routes());
+        app.use(router.allowedMethods());
+        return true;
+    });
+}
+
 module.exports = function(app) {
     return function(name) {
+        if (name === 'index') {
+            return resourceIndex(app);
+        }
+
         let router = new Router({
             prefix: `/${name}`,
         });
@@ -54,6 +79,8 @@ module.exports = function(app) {
 
             app.use(router.routes());
             app.use(router.allowedMethods());
+            app.resources = app.resources || [];
+            app.resources.push({name: name, caps: Object.keys(resource)});
             console.log(`Set up resource ${name} on /${name}.`);
         });
     };
