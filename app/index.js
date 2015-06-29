@@ -36,7 +36,7 @@ Promise.all([
 }).then(function() {
     console.log('Starting server...');
     return app.listen(config.port, function() {
-        console.log(`Application '${config.name}' running on port ${config.port}`);
+        console.log(`Application '${config.name}' v${config.version} running on port ${config.port}`);
     });
 }).catch(function(err) {
     if (err.stack) {
