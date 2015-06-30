@@ -27,7 +27,7 @@ let findResource = co.wrap(function *(name) {
 
 function *notImplemented(next) {
     this.status = 501;
-    this.body = {error: {title: 'Not Implemented'}};
+    this.body = {error: {title: 'Not Implemented', status: 501}};
     yield next;
 }
 
