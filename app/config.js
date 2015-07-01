@@ -22,6 +22,7 @@ setif('PRETTY');
 setif('LOG_PATH');
 setif('NODE_ENV', 'env');
 setif('TRUST_PROXY');
+setif('URL_ROOT');
 
 env.proxy = !!env.trustProxy;
 
@@ -32,6 +33,7 @@ module.exports = _.merge({
     port: 5000,
     pretty: false,
     proxy: false,
+    urlRoot: 'http://localhost:5000/',
 }, pkginfo.exports, env);
 
 process.env.NODE_ENV = module.exports.env;

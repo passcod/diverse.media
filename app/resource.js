@@ -3,12 +3,30 @@
 const _ = require('lodash');
 const co = require('co');
 const fs = require('mz/fs');
+const links = require('./links');
+const noop = function() {};
 const path = require('path');
 const Router = require('koa-router');
+const writer = require('./writer');
 
 const dir = path.join(__dirname, 'resources');
 
 let findResource = co.wrap(function *(name) {
+    if (name === '') {
+        return {
+            index: function *() {
+                yield co(this.writer(this.app.resources)
+                .then(function(data) {
+                    data.meta = {version: this.app.config.version};
+                    data.data.filter(function(o) {
+                        return o.id === '';
+                    })[0].id = 'resources';
+                    this.body = data;
+                }.bind(this)));
+            },
+        };
+    }
+
     const file = path.join(dir, `${name}.js`);
     const folder = path.join(dir, name, 'index.js');
 
@@ -25,53 +43,34 @@ let findResource = co.wrap(function *(name) {
     throw `Resource ${name} not found!`;
 });
 
-function *notImplemented(next) {
-    this.status = 501;
-    this.body = {error: {title: 'Not Implemented', status: 501}};
-    yield next;
-}
-
 function setupRoute(router, route, method, gen) {
     if (_.isFunction(gen)) {
         router[method](route, gen);
-    } else {
-        router[method](route, notImplemented);
     }
 }
 
-function resourceIndex(app) {
-    let router = new Router();
-    const Writer = require('jsonapi-serializer');
-
-    return new Writer('resources', app.resources.map(function (res, i) {
-        res.id = i;
-        return res;
-    }), {
-        attributes: ['name', 'caps']
-    }).then(function(data) {
-        router.get('/', function *(next) {
-            data.meta = {version: app.config.version};
-            this.body = data;
-            yield next;
+function setupHelpers(name, router, resource) {
+    router.use('/', function *(next) {
+        const schema = (resource.writerSchema || noop).call(this);
+        this.links = links.sub(name);
+        this.writer = writer(name || 'resources', schema || {
+            attributes: [],
+            dataLinks: {
+                self: function(thing) { return this.links(thing.id); }.bind(this),
+            },
         });
-
-        app.use(router.routes());
-        app.use(router.allowedMethods());
-        return true;
+        yield next;
     });
 }
 
 module.exports = function(app) {
     return function(name) {
-        if (name === 'index') {
-            return resourceIndex(app);
-        }
-
         let router = new Router({
             prefix: `/${name}`,
         });
 
         return findResource(name).then(function(resource) {
+            setupHelpers(name, router, resource);
             setupRoute(router, '/', 'get', resource.index);
             setupRoute(router, '/', 'post', resource.create);
             setupRoute(router, '/:id', 'get', resource.show);
@@ -81,8 +80,8 @@ module.exports = function(app) {
             app.use(router.routes());
             app.use(router.allowedMethods());
             app.resources = app.resources || [];
-            app.resources.push({name: name, caps: Object.keys(resource)});
-            console.log(`Set up resource ${name} on /${name}.`);
+            app.resources.push({id: name});
+            console.log(`Set up resource ${name || 'index'} on /${name}.`);
         });
     };
 };

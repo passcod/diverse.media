@@ -22,18 +22,11 @@ app.use(require('koa-better-body')());
 app.use(require('koa-cors')());
 app.use(require('koa-compressor')());
 app.use(require('koa-json')({pretty: config.pretty}));
-app.use(function *(next) {
-    this.jsonapi = {
-        reader: require('yayson').Store,
-        writer: require('jsonapi-serializer'),
-    };
-    yield next;
-});
 
 Promise.all([
     app.resource('projects'),
 ]).then(function() {
-    return app.resource('index');
+    return app.resource('');
 }).then(function() {
     console.log('Starting server...');
     return app.listen(config.port, function() {

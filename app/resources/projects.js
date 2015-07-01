@@ -4,13 +4,8 @@ const co = require('co');
 const Project = require('../models/project');
 
 exports.index = function *() {
-    const Writer = this.jsonapi.writer;
     yield co(Project.run()
-    .then(function(projects) {
-        return new Writer('projects', projects, {
-            attributes: ['name'],
-        });
-    })
+    .then(this.writer)
     .then(function(data) {
         this.body = data;
     }.bind(this)));
@@ -36,18 +31,21 @@ exports.create = function *(next) {
         return yield next;
     }
 
+    const hasId = typeof data.id !== 'undefined';
+    if (hasId) {
+        data.attributes.id = data.id;
+    }
+
     let project  = new Project(data.attributes);
-    const Writer = this.jsonapi.writer;
     yield co(project.saveAll()
     .then(function(project) {
-        return new Writer('projects', project, {
-            attributes: ['name'],
-        });
-    })
-    .then(function(data) {
-        this.body = data;
-        this.response.set('Location', `/projects/${data.data.id}`);
-        this.status = 201;
+        this.set('Location', this.links(project.id));
+        this.status = hasId ? 204 : 201;
+        return project;
+    }.bind(this))
+    .then(hasId ? function() {} : this.writer)
+    .then(function(json) {
+        this.body = json;
     }.bind(this)));
 };
 
@@ -58,13 +56,8 @@ exports.show = function *(next) {
         return yield next;
     }
 
-    const Writer = this.jsonapi.writer;
     yield co(Project.get(id).run()
-    .then(function(projects) {
-        return new Writer('projects', projects, {
-            attributes: ['name'],
-        });
-    })
+    .then(this.writer)
     .then(function(data) {
         this.body = data;
     }.bind(this)));
@@ -84,4 +77,14 @@ exports.destroy = function *(next) {
     .then(function() {
         this.status = 204;
     }.bind(this)));
+};
+
+exports.writerSchema = function() {
+    let self = this;
+    return {
+        attributes: ['name'],
+        dataLinks: {
+            self: function(project) { return self.links(project.id); },
+        },
+    };
 };

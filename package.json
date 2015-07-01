@@ -36,6 +36,7 @@
     "mz": "^2.0.0",
     "pkginfo": "^0.3.0",
     "thinky": "^2.0.6",
+    "url-join": "^0.0.1",
     "yayson": "^1.0.5"
   },
   "devDependencies": {
