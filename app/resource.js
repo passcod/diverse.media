@@ -10,23 +10,7 @@ const Router = require('koa-router');
 const writer = require('./writer');
 
 const dir = path.join(__dirname, 'resources');
-
-let findResource = co.wrap(function *(name) {
-    if (name === '') {
-        return {
-            index: function *() {
-                yield co(this.writer(this.app.resources)
-                .then(function(data) {
-                    data.meta = {version: this.app.config.version};
-                    data.data.filter(function(o) {
-                        return o.id === '';
-                    })[0].id = 'resources';
-                    this.body = data;
-                }.bind(this)));
-            },
-        };
-    }
-
+const findResource = co.wrap(function *(name) {
     const file = path.join(dir, `${name}.js`);
     const folder = path.join(dir, name, 'index.js');
 
