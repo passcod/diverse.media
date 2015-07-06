@@ -1,6 +1,8 @@
-# Orim
+# Diverse.media
 
-_Prototype._
+[![Github |](https://img.shields.io/github/tag/passcod/diverse.media.svg?style=flat-square)](https://github.com/passcod/diverse.media)[![ MIT |](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](http://passcod.mit-license.org)[![ Code of Conduct](https://img.shields.io/badge/contributor-covenant-123456.svg?style=flat-square)](http://contributor-covenant.org/version/1/1/0/)
+
+_A curated library of diverse authors and artists._
 
 ## Dependencies
 
@@ -10,8 +12,8 @@ _Prototype._
 ## Develop
 
 ```bash
-$ git clone git@github.com:passcod/orim.git
-$ cd orim
+$ git clone git@github.com:passcod/diverse.media.git
+$ cd diverse.media
 $ atom .
 $ npm run watch
 ```
@@ -31,9 +33,9 @@ After that:
 ```bash
 # Checks your access to remote deployment tools
 $ npm run deploy check
-You can deploy to alpha.orim.io (internal testing)
-You can deploy to beta.orim.io (private beta)
-You can deploy to orim.io (production)
+You can deploy to alpha.diverse.media (internal testing)
+You can deploy to beta.diverse.media (private beta)
+You can deploy to diverse.media (production)
 ```
 
 Whenever:
@@ -42,10 +44,10 @@ Whenever:
 # To deploy
 $ npm run deploy
 All tests pass
-Deployed to alpha.orim.io (ad63nd)
+Deployed to alpha.diverse.media (ad63nd)
 
 # Or to production (if you have permission)
 $ npm run deploy production
 All tests pass
-Deployed to orim.io (v1.2.3)
+Deployed to diverse.media (v1.2.3)
 ```

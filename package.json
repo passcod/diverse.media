@@ -1,21 +1,21 @@
 {
-  "name": "orim",
+  "name": "diverse.media",
   "version": "0.1.0",
-  "description": "Orim prototype to explore database design",
+  "description": "A curated library of diverse authors and artists.",
   "main": "index.js",
   "scripts": {
     "build": "gulp",
     "clean": "rm -r build public/*; touch public/.gitkeep",
-    "test": "mocha",
+    "test": "standard; mocha",
     "watch": "gulp watch"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/passcod/orim.git"
+    "url": "git+https://github.com/passcod/diverse.media.git"
   },
   "author": "Félix Saparelli <me@passcod.name>",
-  "license": "ISC",
-  "homepage": "https://github.com/passcod/orim",
+  "license": "MIT",
+  "homepage": "https://diverse.media",
   "dependencies": {
     "bunyan": "^1.4.0",
     "co": "^4.5.4",
@@ -49,8 +49,6 @@
     "gulp-debug": "^2.0.1",
     "gulp-imagemin": "^2.2.1",
     "gulp-jade": "^1.0.1",
-    "gulp-jscs": "^1.6.0",
-    "gulp-jshint": "^1.11.1",
     "gulp-mocha": "^2.1.2",
     "gulp-newer": "^0.5.1",
     "gulp-notify": "^2.2.0",
@@ -61,7 +59,6 @@
     "gulp-sourcemaps": "^1.5.2",
     "gulp-uglify": "^1.2.0",
     "gulp-util": "^3.0.6",
-    "jshint": "^2.8.0",
     "lost": "^6.3.0",
     "merge-stream": "^0.1.7",
     "node-notifier": "^4.2.3",
@@ -72,6 +69,7 @@
     "postcss-nested": "^0.3.2",
     "postcss-quantity-queries": "^0.3.1",
     "postcss-simple-vars": "^0.3.0",
+    "standard": "^4.5.2",
     "strip-ansi": "^2.0.1",
     "uglifyify": "^3.0.1",
     "vinyl-buffer": "^1.0.0",

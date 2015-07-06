@@ -29,7 +29,7 @@ env.proxy = !!env.trustProxy;
 module.exports = _.merge({
     env: 'development',
     logPath: 'logs',
-    name: 'orim',
+    name: 'diverse.media',
     port: 5000,
     pretty: false,
     proxy: false,

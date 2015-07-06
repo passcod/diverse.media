@@ -134,27 +134,10 @@ gulp.task('css', function() {
     .pipe(gulp.dest('build/css'));
 });
 
-function lintJs(name, list, deps) {
-    deps = deps || [];
-    const task = `lint.${name}`;
-    const jscs = require('gulp-jscs');
-    const jshint = require('gulp-jshint');
-    gulp.task(task, deps, function() {
-        return gulp.src(list)
-        .pipe(plumber())
-        .pipe(debug(task))
-        .pipe(jscs())
-        .pipe(jshint())
-        .pipe(jshint.reporter('default'))
-        .pipe(jshint.reporter('fail'));
-    });
-}
-
 function makeJs(name, list, deps) {
     deps = deps || [];
     let task = `js.${name}`;
 
-    lintJs(name, list, deps);
     gulp.task(task, deps, function() {
         return require('browserify')({
             entries: list,
@@ -175,9 +158,8 @@ function makeJs(name, list, deps) {
     });
 }
 
-makeJs('index', ['src/js/orim.js']);
+makeJs('index', ['src/js/diverse.media.js']);
 
 gulp.task('js', [
     'js.index',
-    'lint.index',
 ]);
