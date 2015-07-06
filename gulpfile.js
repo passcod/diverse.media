@@ -134,10 +134,25 @@ gulp.task('css', function () {
     .pipe(gulp.dest('build/css'))
 })
 
+function lintJs (name, list, deps) {
+  deps = deps || []
+  const standard = require('gulp-standard')
+  const task = `lint.${name}`
+
+  gulp.task(task, deps, function () {
+    return gulp.src(list)
+      .pipe(plumber())
+      .pipe(debug(task))
+      .pipe(standard())
+      .pipe(standard.reporter('default'))
+  })
+}
+
 function makeJs (name, list, deps) {
   deps = deps || []
-  let task = `js.${name}`
+  const task = `js.${name}`
 
+  lintJs(name, list, deps)
   gulp.task(task, deps, function () {
     return require('browserify')({
       entries: list,
@@ -158,8 +173,10 @@ function makeJs (name, list, deps) {
   })
 }
 
-makeJs('index', ['src/js/diverse.media.js'])
+lintJs('app', ['app/**.js'])
+makeJs('index', ['src/js/diverse.js'])
 
 gulp.task('js', [
-  'js.index'
+  'js.index',
+  'lint.app'
 ])
