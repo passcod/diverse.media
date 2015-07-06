@@ -1,9 +1,9 @@
-'use strict';
+'use strict'
 
-const Jsonapi = require('jsonapi-serializer');
+const Jsonapi = require('jsonapi-serializer')
 
-module.exports = function(type, schema) {
-    return function(data) {
-        return new Jsonapi(type, data, schema);
-    };
-};
+module.exports = function (type, schema) {
+  return function (data) {
+    return new Jsonapi(type, data, schema)
+  }
+}
