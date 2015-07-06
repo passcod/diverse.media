@@ -24,13 +24,19 @@ app.use(require('koa-compressor')())
 app.use(require('koa-json')({pretty: config.pretty}))
 
 Promise.all([
-  app.resource('projects')
+  app.resource('authors'),
+  app.resource('works')
 ]).then(function () {
   return app.resource('')
 }).then(function () {
   console.log('Starting server...')
   return app.listen(config.port, function () {
-    console.log(`Application '${config.name}' v${config.version} running on port ${config.port}`)
+    console.log(`
+    ${config.name} v${config.version} UP
+      Listening on port ${config.port}, environment is ${config.env}
+      Use 'npm run logs' or 'npm run errors' to tail logs
+      Pretty user-friendly request log follows:
+    `)
   })
 }).catch(function (err) {
   if (err.stack) {

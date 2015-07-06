@@ -1,10 +1,10 @@
 'use strict'
 
 const co = require('co')
-const Project = require('../models/project')
+const Work = require('../models/work')
 
 exports.index = function *() {
-  yield co(Project.run()
+  yield co(Work.run()
     .then(this.writer)
     .then(function (data) {
       this.body = data
@@ -21,7 +21,7 @@ exports.create = function *(next) {
 
   const data = payload.data
 
-  if (data.type !== 'projects') {
+  if (data.type !== 'works') {
     this.status = 400
     return yield next
   }
@@ -36,12 +36,12 @@ exports.create = function *(next) {
     data.attributes.id = data.id
   }
 
-  let project = new Project(data.attributes)
-  yield co(project.saveAll()
-    .then(function (project) {
-      this.set('Location', this.links(project.id))
+  let work = new Work(data.attributes)
+  yield co(work.saveAll()
+    .then(function (work) {
+      this.set('Location', this.links(work.id))
       this.status = hasId ? 204 : 201
-      return project
+      return work
     }.bind(this))
     .then(hasId ? function () {} : this.writer)
     .then(function (json) {
@@ -56,7 +56,7 @@ exports.show = function *(next) {
     return yield next
   }
 
-  yield co(Project.get(id).run()
+  yield co(Work.get(id).run()
     .then(this.writer)
     .then(function (data) {
       this.body = data
@@ -70,9 +70,9 @@ exports.destroy = function *(next) {
     return yield next
   }
 
-  yield co(Project.get(id).run()
-    .then(function (project) {
-      return project.delete()
+  yield co(Work.get(id).run()
+    .then(function (work) {
+      return work.delete()
     })
     .then(function () {
       this.status = 204
@@ -84,7 +84,7 @@ exports.writerSchema = function () {
   return {
     attributes: ['name'],
     dataLinks: {
-      self: function (project) { return self.links(project.id) }
+      self: function (work) { return self.links(work.id) }
     }
   }
 }
