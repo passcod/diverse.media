@@ -1,10 +1,10 @@
 'use strict'
 
 const co = require('co')
-const Author = require('../models/author')
+const Person = require('../models/person')
 
 exports.index = function *() {
-  yield co(Author.run()
+  yield co(Person.run()
     .then(this.writer)
     .then(function (data) {
       this.body = data
@@ -21,7 +21,7 @@ exports.create = function *(next) {
 
   const data = payload.data
 
-  if (data.type !== 'authors') {
+  if (data.type !== 'people') {
     this.status = 400
     return yield next
   }
@@ -36,12 +36,12 @@ exports.create = function *(next) {
     data.attributes.id = data.id
   }
 
-  let author = new Author(data.attributes)
-  yield co(author.saveAll()
-    .then(function (author) {
-      this.set('Location', this.links(author.id))
+  let person = new Person(data.attributes)
+  yield co(person.saveAll()
+    .then(function (person) {
+      this.set('Location', this.links(person.id))
       this.status = hasId ? 204 : 201
-      return author
+      return person
     }.bind(this))
     .then(hasId ? function () {} : this.writer)
     .then(function (json) {
@@ -56,7 +56,7 @@ exports.show = function *(next) {
     return yield next
   }
 
-  yield co(Author.get(id).run()
+  yield co(Person.get(id).run()
     .then(this.writer)
     .then(function (data) {
       this.body = data
@@ -70,9 +70,9 @@ exports.destroy = function *(next) {
     return yield next
   }
 
-  yield co(Author.get(id).run()
-    .then(function (author) {
-      return author.delete()
+  yield co(Person.get(id).run()
+    .then(function (person) {
+      return person.delete()
     })
     .then(function () {
       this.status = 204
@@ -84,7 +84,7 @@ exports.writerSchema = function () {
   return {
     attributes: ['name'],
     dataLinks: {
-      self: function (author) { return self.links(author.id) }
+      self: function (person) { return self.links(person.id) }
     }
   }
 }

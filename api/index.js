@@ -24,7 +24,7 @@ app.use(require('koa-compressor')())
 app.use(require('koa-json')({pretty: config.pretty}))
 
 Promise.all([
-  app.resource('authors'),
+  app.resource('people'),
   app.resource('works')
 ]).then(function () {
   return app.resource('')
