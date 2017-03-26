@@ -1,5 +1,7 @@
 # Diverse.media
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/passcod/diverse.media.svg)](https://greenkeeper.io/)
+
 [![Github |](https://img.shields.io/github/tag/passcod/diverse.media.svg?style=flat-square)](https://github.com/passcod/diverse.media)[![ Build Status |](https://img.shields.io/travis/passcod/diverse.media.svg?style=flat-square)](https://travis-ci.org/passcod/diverse.media)[![ Code Quality |](https://img.shields.io/codeclimate/github/passcod/diverse.media.svg?style=flat-square)](https://codeclimate.com/github/passcod/diverse.media)[![ Dependency Status |](https://img.shields.io/david/passcod/diverse.media.svg?style=flat-square)](https://david-dm.org/passcod/diverse.media)[![ MIT License |](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](http://passcod.mit-license.org)[![ Code of Conduct](https://img.shields.io/badge/contributor-covenant-123456.svg?style=flat-square)](http://contributor-covenant.org/version/1/1/0/)
 
 _A curated library of diverse authors and artists._
